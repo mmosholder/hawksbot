@@ -1,0 +1,26 @@
+{
+  "name": "hawksbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmosholder/hawksbot.git"
+  },
+  "scripts": {
+    "build": "npm install && gulp",
+    "prestart": "npm install",
+    "postinstall": "gulp"
+  },
+  "author": "Malinda Mosholder",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.15.2",
+    "moment": "^2.18.1",
+    "node-rest-client": "^2.0.1",
+    "node-schedule": "^1.2.1",
+    "twit": "^2.2.5",
+    "whatwg-fetch": "^2.0.1"
+  }
+}
