@@ -8,9 +8,8 @@
     "url": "git+https://github.com/mmosholder/hawksbot.git"
   },
   "scripts": {
-    "build": "npm install && gulp",
     "prestart": "npm install",
-    "postinstall": "gulp"
+    "postinstall": "node bot.js"
   },
   "author": "Malinda Mosholder",
   "license": "MIT",
