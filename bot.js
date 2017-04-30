@@ -1,6 +1,12 @@
 var _ = require('lodash');
 var Twit = require('twit');
-var T = new Twit(require('./config.js'));
+var T = new Twit({
+ consumer_key: process.env.CONSUMER_KEY,
+ consumer_secret: process.env.CONSUMER_SECRET,
+ access_token: process.env.ACCESS_TOKEN,
+ access_token_secret: process.env.ACCESS_TOKEN_SECRET
+});
+
 var stream = T.stream('user');
 var bodyParser = require('body-parser');
 var express = require('express');
@@ -25,7 +31,7 @@ moment.fn.daysFromNow = function() {
 const fromNow = moment(unix).daysFromNow() + ' DAYS';
 
 rule.dayOfWeek = [0, new schedule.Range(0, 6)];
-rule.hour = 13;
+rule.hour = 17;
 rule.minute = 0;
 
 var j = schedule.scheduleJob(rule, function(){
