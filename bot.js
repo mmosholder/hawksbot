@@ -32,7 +32,7 @@ const fromNow = moment(unix).daysFromNow() + ' DAYS';
 
 rule.dayOfWeek = [0, new schedule.Range(0, 6)];
 rule.hour = 17;
-rule.minute = 10;
+rule.minute = 15;
 
 var j = schedule.scheduleJob(rule, function(){
   console.log('Today is recognized by Rebecca Black!');
