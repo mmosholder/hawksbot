@@ -1,11 +1,6 @@
 var _ = require('lodash');
 var Twit = require('twit');
-var T = new Twit({
- consumer_key: process.env.CONSUMER_KEY,
- consumer_secret: process.env.CONSUMER_SECRET,
- access_token: process.env.ACCESS_TOKEN,
- access_token_secret: process.env.ACCESS_TOKEN_SECRET
-});
+var T = new Twit(require('./config.js'));
 
 var stream = T.stream('user');
 var bodyParser = require('body-parser');
@@ -30,29 +25,31 @@ moment.fn.daysFromNow = function() {
 
 const fromNow = moment(unix).daysFromNow() + ' DAYS';
 
+console.log(fromNow);
+
 rule.dayOfWeek = [0, new schedule.Range(0, 6)];
 rule.hour = 17;
-rule.minute = 15;
+rule.minute = 18;
 
-var j = schedule.scheduleJob(rule, function(){
-  console.log('Today is recognized by Rebecca Black!');
+// var j = schedule.scheduleJob(rule, function(){
+//   console.log('Today is recognized by Rebecca Black!');
+//
+//   // Post the daily update
+//   T.post('statuses/update', { status: ("IT HAS BEEN " + fromNow + " SINCE THE LAST BLACKHAWKS WIN RT FOR AWARENESS") }, function(err, data, response) {
+//     console.log(data)
+//   });
+//
+// });
 
-  // Post the daily update
-  T.post('statuses/update', { status: ("IT HAS BEEN " + fromNow + " SINCE THE LAST BLACKHAWKS WIN RT FOR AWARENESS") }, function(err, data, response) {
-    console.log(data)
-  });
 
-});
-
-
-//Interact with anyone who dare @s the bot
+// //Interact with anyone who dare @s the bot
 stream.on('tweet', function (message) {
-  console.log(message)
-  if (message.in_reply_to_screen_name == 'BlackhawksBot') {
-    T.post('statuses/update', {in_reply_to_status_id: message.id_str, status: '@' + message.user.screen_name + ' ' + (fromNow + ' BUDDY')}, function(err, data, response){
-      console.log('snarky reply sent');
-    });
-  }
+  console.log(fromNow)
+  // if (message.in_reply_to_screen_name == 'BlackhawksBot') {
+  //   T.post('statuses/update', {in_reply_to_status_id: message.id_str, status: '@' + message.user.screen_name + ' ' + (fromNow + ' BUDDY')}, function(err, data, response){
+  //     console.log('snarky reply sent');
+  //   });
+  // }
 })
 
 var port = process.env.PORT || 9945;
